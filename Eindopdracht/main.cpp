@@ -1,6 +1,7 @@
 #include <GL/freeglut.h>
 #include <cstdio>
 #define _USE_MATH_DEFINES
+#define STB_IMAGE_IMPLEMENTATION
 #include <cmath>
 #include <iostream>
 #include "Scene.h"
@@ -8,7 +9,7 @@
 #include "CubeDrawComponent.h"
 #include "stb_image.h"
 
-#define STB_IMAGE_IMPLEMENTATION
+
 float lastFrameTime = 0;
 
 int width, height;
