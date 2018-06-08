@@ -6,7 +6,9 @@
 #include "Scene.h"
 #include "GameObject.h"
 #include "CubeDrawComponent.h"
+#include "stb_image.h"
 
+#define STB_IMAGE_IMPLEMENTATION
 float lastFrameTime = 0;
 
 int width, height;
@@ -114,7 +116,7 @@ void display()
 
 void initScene() {
 	scene = new Scene();
-
+	
 	for (int x = -10; x <= 10; x += 5)
 	{
 		for (int y = -10; y <= 10; y += 5)
