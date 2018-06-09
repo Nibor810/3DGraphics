@@ -229,11 +229,11 @@ void model_component::draw()
 {
 	glEnable(GL_TEXTURE_2D);
 	//glColor3f(0.5f,0.5f,0.5f);
-
-	glBindTexture(GL_TEXTURE_2D, 1);
+	glBindTexture(GL_TEXTURE_2D, textureID);
 	glBegin(GL_TRIANGLES);
 	for (auto& group : groups) {
-		materials[group->materialIndex]->texture->bindTexture();
+		//materials[group->materialIndex]->texture->bindTexture();
+
 		for (auto& face : group->faces) {
 			for (auto& vertex : face.vertices) {
 				Vector3D vectexture = texcoords[vertex.texcoord];

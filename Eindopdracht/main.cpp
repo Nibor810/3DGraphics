@@ -1,17 +1,19 @@
+#define _USE_MATH_DEFINES
+#define NUMBER_OF_TEXTURES 3
 #include <GL/freeglut.h>
 #include <cstdio>
-#define _USE_MATH_DEFINES
-#define STB_IMAGE_IMPLEMENTATION
 #include <cmath>
 #include <iostream>
 #include "Scene.h"
 #include "GameObject.h"
 #include "CubeDrawComponent.h"
+#include "ModelComponent.h"
+#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-
+//baguette
 float lastFrameTime = 0;
-
+GLuint textures[NUMBER_OF_TEXTURES];
 int width, height;
 
 //struct to keep camera position
@@ -115,24 +117,56 @@ void display()
 	glutSwapBuffers();
 }
 
+//add all obejct to scene
 void initScene() {
 	scene = new Scene();
-	
+	/*
 	for (int x = -10; x <= 10; x += 5)
 	{
 		for (int y = -10; y <= 10; y += 5)
 		{
+		*/
 			GameObject* cube = new GameObject();
-			CubeDrawComponent* cubeComponent = new CubeDrawComponent();
-			cubeComponent->setColor(1, 0, 0);
-			cubeComponent->setSize(1);
-			cube->drawComponent = cubeComponent;
-			cube->setPosition(x, 0, y);
+			//CubeDrawComponent* cubeComponent = new CubeDrawComponent();
+			//cubeComponent->setColor(1, 0, 0);
+			//cubeComponent->setSize(1);
+			//cube->drawComponent = cubeComponent;
+			model_component* model = new model_component("models/honda_jazz.obj", 1);
+			cube->drawComponent = model;
+			//cube->setPosition(x, 0, y);
+			cube->setPosition(1, 0, 1);
 			cube->setRotationAll(0);
-			cube->setScaleAll(1);
+			cube->setScaleAll(0.1f);
 			scene->addGameObject(cube);
+			/*
 		}
 	}
+	*/
+}
+
+void loadTexture(int id, const char* location) {
+	int bpp, height, width;
+
+	stbi_uc* data = stbi_load(location, &width, &height, &bpp, 3);//get data of image
+
+	glBindTexture(GL_TEXTURE_2D, textures[id]);
+	glTexImage2D(GL_TEXTURE_2D,
+		0,					//level
+		GL_RGB,				//internal format
+		width,				//width
+		height,				//height
+		0,					//border
+		GL_RGB,				//data format
+		GL_UNSIGNED_BYTE,	//data type
+		data);				//data
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+}
+
+void initTextures() {
+	glEnable(GL_TEXTURE_2D);
+	glGenTextures(NUMBER_OF_TEXTURES, textures);
+	loadTexture(1, "models/Tree_01.png");
 }
 
 
@@ -218,10 +252,8 @@ int main(int argc, char* argv[])
 	//set memory for list that holds key status
 	memset(keys, 0, sizeof(keys));
 	init();
+	initTextures();
 	initScene();
-
-	
-	
 	glutIdleFunc(idle);
 	glutDisplayFunc(display);
 	glutReshapeFunc([](int w, int h) { width = w; height = h; glViewport(0, 0, w, h); });
