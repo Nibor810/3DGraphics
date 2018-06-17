@@ -145,7 +145,7 @@ void initScene() {
 	GameObject* car = new GameObject();
 	model_component* model = new model_component("models/honda_jazz.obj", textures[0]);
 	car->drawComponent = model;
-	car->setPosition(0, 2, 5);
+	car->setPosition(0, 2, 0);
 	car->setRotationAll(0);
 	car->setScaleAll(0.05f);
 	scene->addGameObject(car);

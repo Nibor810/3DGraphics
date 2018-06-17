@@ -246,6 +246,7 @@ void model_component::draw()
 		}
 	}
 	glEnd();
+	glDisable(GL_TEXTURE_2D);
 }
 
 
