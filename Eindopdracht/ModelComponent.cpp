@@ -228,11 +228,11 @@ model_component::~model_component(void)
 void model_component::draw()
 {
 	glEnable(GL_TEXTURE_2D);
-	//glColor3f(0.5f,0.5f,0.5f);
+	glColor3f(1,1,1);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glBegin(GL_TRIANGLES);
 	for (auto& group : groups) {
-		//materials[group->materialIndex]->texture->bindTexture();
+		materials[group->materialIndex]->texture->bindTexture();
 
 		for (auto& face : group->faces) {
 			for (auto& vertex : face.vertices) {

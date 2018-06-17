@@ -120,28 +120,36 @@ void display()
 //add all obejct to scene
 void initScene() {
 	scene = new Scene();
-	/*
+
 	for (int x = -10; x <= 10; x += 5)
 	{
 		for (int y = -10; y <= 10; y += 5)
 		{
-		*/
+
 			GameObject* cube = new GameObject();
-			//CubeDrawComponent* cubeComponent = new CubeDrawComponent();
-			//cubeComponent->setColor(1, 0, 0);
-			//cubeComponent->setSize(1);
-			//cube->drawComponent = cubeComponent;
-			model_component* model = new model_component("models/honda_jazz.obj", 1);
-			cube->drawComponent = model;
-			//cube->setPosition(x, 0, y);
-			cube->setPosition(1, 0, 1);
+			CubeDrawComponent* cubeComponent = new CubeDrawComponent();
+			cubeComponent->setColor(1, 0, 0);
+			cubeComponent->setSize(1);
+			cube->drawComponent = cubeComponent;
+			//model_component* model = new model_component("models/honda_jazz.obj", 1);
+			//cube->drawComponent = model;
+			cube->setPosition(x, 0, y);
 			cube->setRotationAll(0);
-			cube->setScaleAll(0.1f);
+			cube->setScaleAll(1);
 			scene->addGameObject(cube);
-			/*
+
 		}
 	}
-	*/
+
+
+	GameObject* car = new GameObject();
+	model_component* model = new model_component("models/honda_jazz.obj", 1);
+	car->drawComponent = model;
+	car->setPosition(1, 2, 1);
+	car->setRotationAll(0);
+	car->setScaleAll(0.1f);
+	scene->addGameObject(car);
+
 }
 
 void loadTexture(int id, const char* location) {
