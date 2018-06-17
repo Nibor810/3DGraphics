@@ -143,11 +143,11 @@ void initScene() {
 
 
 	GameObject* car = new GameObject();
-	model_component* model = new model_component("models/honda_jazz.obj", 1);
+	model_component* model = new model_component("models/honda_jazz.obj", textures[0]);
 	car->drawComponent = model;
-	car->setPosition(1, 2, 1);
+	car->setPosition(0, 2, 5);
 	car->setRotationAll(0);
-	car->setScaleAll(0.1f);
+	car->setScaleAll(0.05f);
 	scene->addGameObject(car);
 
 }
@@ -172,9 +172,10 @@ void loadTexture(int id, const char* location) {
 }
 
 void initTextures() {
+	stbi_set_flip_vertically_on_load(true);
 	glEnable(GL_TEXTURE_2D);
 	glGenTextures(NUMBER_OF_TEXTURES, textures);
-	loadTexture(1, "models/Tree_01.png");
+	loadTexture(0, "models/Jazz_diffuse.jpg");
 }
 
 
