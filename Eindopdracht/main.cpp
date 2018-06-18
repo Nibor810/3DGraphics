@@ -1,5 +1,7 @@
 #define _USE_MATH_DEFINES
 #define NUMBER_OF_TEXTURES 3
+#define SKYBOX_MIN 500
+#define PI 3.14159265358979323846f
 #include <GL/freeglut.h>
 #include <cstdio>
 #include <cmath>
@@ -10,11 +12,13 @@
 #include "ModelComponent.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+#include "Skybox.h"
 
 //baguette
 float lastFrameTime = 0;
 GLuint textures[NUMBER_OF_TEXTURES];
 int width, height;
+Skybox skybox;
 
 //struct to keep camera position
 struct Camera
@@ -41,7 +45,7 @@ GLfloat qaRed[] = { 1.0, 0.0, 0.0, 1.0 }; //White Color
 // Light source position
 */
 GLfloat qaLightPosition[] = { 0, 6, 0, 1 };
-void init()
+void initLighting()
 {
 	GLfloat qaAmbientLight[] = { 0, 0, 0, 1 };
 	GLfloat qaDiffuseLight[] = { 1, 1, 1, 1 };
@@ -67,6 +71,10 @@ void updateLight(float deltaTime)
 
 }
 
+void initSkybox() {
+	skybox.load((SKYBOX_MIN / sin(PI / 4)), textures[1]);
+}
+
 void drawSphere(float radius) {
 	//glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, qaGreen);
 	//glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, qaGreen);
@@ -87,12 +95,12 @@ void display()
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(60.0f, (float)width / height, 0.1, 30);
+	gluPerspective(60.0f, (float)width / height, 0.1, 3000);
 	
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	
+	glEnable(GL_LIGHTING);
 	glRotatef(camera.rotX, 1, 0, 0);
 	glRotatef(camera.rotY, 0, 1, 0);
 	glRotatef(camera.rotZ, 0, 0, 1);
@@ -114,6 +122,8 @@ void display()
 
 	scene->drawScene();
 
+	skybox.draw();
+
 	glutSwapBuffers();
 }
 
@@ -131,8 +141,6 @@ void initScene() {
 			cubeComponent->setColor(1, 0, 0);
 			cubeComponent->setSize(1);
 			cube->drawComponent = cubeComponent;
-			//model_component* model = new model_component("models/honda_jazz.obj", 1);
-			//cube->drawComponent = model;
 			cube->setPosition(x, 0, y);
 			cube->setRotationAll(0);
 			cube->setScaleAll(1);
@@ -149,6 +157,8 @@ void initScene() {
 	car->setRotationAll(0);
 	car->setScaleAll(0.05f);
 	scene->addGameObject(car);
+
+	
 
 }
 
@@ -176,7 +186,16 @@ void initTextures() {
 	glEnable(GL_TEXTURE_2D);
 	glGenTextures(NUMBER_OF_TEXTURES, textures);
 	loadTexture(0, "models/Jazz_diffuse.jpg");
+	loadTexture(1, "models/skybox.png");
 }
+
+void initWorld() {
+	initTextures();
+	initSkybox();
+	initScene();
+}
+
+
 
 
 void moveUp(float fac)
@@ -260,9 +279,8 @@ int main(int argc, char* argv[])
 	
 	//set memory for list that holds key status
 	memset(keys, 0, sizeof(keys));
-	init();
-	initTextures();
-	initScene();
+	initLighting();
+	initWorld();
 	glutIdleFunc(idle);
 	glutDisplayFunc(display);
 	glutReshapeFunc([](int w, int h) { width = w; height = h; glViewport(0, 0, w, h); });
