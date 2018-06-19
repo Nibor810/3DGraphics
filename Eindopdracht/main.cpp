@@ -24,6 +24,7 @@ float lastFrameTime = 0;
 GLuint textures[NUMBER_OF_TEXTURES];
 int width, height;
 Skybox skybox;
+float speedfactor = 1;
 
 //struct to keep camera position
 struct Camera
@@ -197,7 +198,7 @@ void initTextures() {
 	glGenTextures(NUMBER_OF_TEXTURES, textures);
 	loadTexture(0, "models/Jazz_diffuse.jpg");
 	loadTexture(1, "models/skybox.png");
-	loadTexture(2, "models/floor.png");
+	loadTexture(2, "models/eigenfloor.png");
 }
 
 void initWorld() {
@@ -222,12 +223,19 @@ void move(float angle, float fac)
 	camera.posY += (float)sin((camera.rotY + angle) / 180 * M_PI) * fac;
 }
 
+void faster() {
+	speedfactor+=0.05f;
+}
+
+void slower() {
+	speedfactor-= 0.05f;
+}
+
 void idle()
 {
 	float frameTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
 	float deltaTime = frameTime - lastFrameTime;
 	lastFrameTime = frameTime;
-
 	const float speed = camera.speed;
 	if (keys['a']) move(0, deltaTime*speed);
 	if (keys['d']) move(180, deltaTime*speed);
@@ -235,9 +243,11 @@ void idle()
 	if (keys['s']) move(270, deltaTime*speed);
 	if (keys[' ']) moveUp(deltaTime*speed);
 	if (keys['e']) moveDown(deltaTime*speed);
+	if (keys['f']) faster();
+	if (keys['v']) slower();
 
 
-	scene->updateScene(deltaTime);
+	scene->updateScene(deltaTime* speedfactor);
 	glutPostRedisplay();
 }
 
