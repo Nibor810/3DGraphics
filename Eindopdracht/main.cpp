@@ -1,6 +1,8 @@
 #define _USE_MATH_DEFINES
 #define NUMBER_OF_TEXTURES 3
 #define SKYBOX_MIN 500
+#define WINDOW_SIZE_WIDTH 800
+#define WINDOW_SIZE_HEIGHT 600
 #define PI 3.14159265358979323846f
 #include <GL/freeglut.h>
 #include <cstdio>
@@ -195,9 +197,6 @@ void initWorld() {
 	initScene();
 }
 
-
-
-
 void moveUp(float fac)
 {
 	camera.posZ -= 1 * fac;
@@ -273,7 +272,7 @@ int main(int argc, char* argv[])
 {
 	
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitWindowSize(800, 600);
+	glutInitWindowSize(WINDOW_SIZE_WIDTH, WINDOW_SIZE_HEIGHT);
 	glutInit(&argc, argv);
 	glutCreateWindow("3D Graphics Eindopdracht - Robin Hobbel");
 	
