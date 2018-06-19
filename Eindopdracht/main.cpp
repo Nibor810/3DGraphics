@@ -146,8 +146,11 @@ void initScene() {
 	MoveComponent* move = new MoveComponent();
 	move->setRotationSpeed(0, 30, 0);
 	car->addComponent(move);
-	car->setOffset(0, 0, 0);
+	car->setOffset(0, 0, 10);
 	scene->addGameObject(car);
+
+
+
 
 }
 
