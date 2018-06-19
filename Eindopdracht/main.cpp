@@ -1,5 +1,5 @@
 #define _USE_MATH_DEFINES
-#define NUMBER_OF_TEXTURES 3
+#define NUMBER_OF_TEXTURES 5
 #define SKYBOX_MIN 500
 #define WINDOW_SIZE_WIDTH 800
 #define WINDOW_SIZE_HEIGHT 600
@@ -15,6 +15,7 @@
 #include "PlaneComponent.h"
 #include "MoveComponent.h"
 #include "RelativeComponent.h"
+#include "TreeComponent.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include "Skybox.h"
@@ -109,6 +110,7 @@ void initScene() {
 	plane->setOffset(0, 0, 0);
 	scene->addGameObject(plane);
 
+	/*
 	for (int x = -10; x <= 10; x += 5)
 	{
 		for (int y = -10; y <= 10; y += 5)
@@ -127,7 +129,7 @@ void initScene() {
 
 		}
 	}
-
+	*/
 
 	GameObject* car = new GameObject();
 	model_component* model = new model_component("models/honda_jazz.obj", textures[0]);
@@ -188,12 +190,15 @@ void initTextures() {
 	loadTexture(0, "models/Jazz_diffuse.jpg");
 	loadTexture(1, "models/skybox.png");
 	loadTexture(2, "models/eigenfloor.png");
+	loadTexture(3, "models/wood.jpg");
+	loadTexture(4, "models/leaves.png");
 }
 
 void initWorld() {
 	initTextures();
 	initSkybox();
 	initScene();
+	scene->loadMap("models/TreeMap.png",textures);
 }
 
 void moveUp(float fac)

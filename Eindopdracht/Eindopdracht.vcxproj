@@ -125,6 +125,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BushComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CubeDrawComponent.cpp" />
     <ClCompile Include="DrawComponent.cpp" />
@@ -136,8 +137,10 @@
     <ClCompile Include="RelativeComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Skybox.cpp" />
+    <ClCompile Include="TreeComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BushComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CubeDrawComponent.h" />
     <ClInclude Include="DrawComponent.h" />
@@ -149,6 +152,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="TreeComponent.h" />
     <ClInclude Include="Vector3D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,6 +1,8 @@
 #include "Scene.h"
 #include "stb_image.h"
 #include <GL/freeglut.h>
+#include "TreeComponent.h"
+#include "BushComponent.h"
 
 void Scene::drawScene()
 {
@@ -34,10 +36,49 @@ void Scene::removeGameObject(GameObject * object)
 	}
 }
 
-void Scene::loadMap(const char * imageLocation)
+Vector3D Scene::map_point_to_world_point(const Vector3D& point) const
+{
+	return Vector3D(point.x - map.width / 2.0f, point.y, point.z - map.height / 2.0f);
+}
+
+void Scene::loadMap(const char * imageLocation, GLuint* textures)
 {
 	map.raw_collision_map = stbi_load(imageLocation, &map.width, &map.height, &map.bpp, 1);
-
+	for (int h = 0; h < map.height; h++) {
+		for (int w = 0; w < map.width; w++) {
+			//pixelwaarde tussen 40 & 60
+			if (map.raw_collision_map[(w + h * map.width)] >= 0 && map.raw_collision_map[(w + h * map.width)] < 100)
+			{
+				Vector3D position = map_point_to_world_point(Vector3D(w, -1, h));
+				//voeg boompje toe
+				GameObject* tree = new GameObject();
+				TreeComponent* treeComponent = new TreeComponent();
+				treeComponent->textureID = textures[3];
+				tree->drawComponent = treeComponent;
+				tree->setPosition(position.x,position.y, position.z);
+				tree->setRotationAll(0);
+				tree->setScaleAll(1);
+				tree->setOffset(0, 0, 0);
+				addGameObject(tree);
+			}
+			//pixelwaarde tusse 60 & 80
+			else if (map.raw_collision_map[(w + h * map.width)] >= 100 && map.raw_collision_map[(w + h * map.width)] < 150)
+			{
+				//voegbosje toe
+				Vector3D position = map_point_to_world_point(Vector3D(w, -1, h));
+				//voeg boompje toe
+				GameObject* tree = new GameObject();
+				BushComponent* bushComponent = new BushComponent();
+				bushComponent->textureID = textures[4];
+				tree->drawComponent = bushComponent;
+				tree->setPosition(position.x, position.y, position.z);
+				tree->setRotationAll(0);
+				tree->setScaleAll(2);
+				tree->setOffset(0, 0, 0);
+				addGameObject(tree);
+			}
+		}
+	}
 }
 
 void Scene::drawText(std::string text, int x, int y)
@@ -76,8 +117,8 @@ void Scene::drawText(std::string text, int x, int y)
 
 void Scene::drawHUD()
 {
-	drawText("temp", WINDOW_SIZE_WIDTH - 100, 25);
-	drawText("test", 10, 25);
+	drawText("HUD", WINDOW_SIZE_WIDTH - 100, 25);
+	drawText("Dit zou een score kunnen zijn", 10, 25);
 }
 
 Scene::Scene()
