@@ -133,6 +133,7 @@
     <ClCompile Include="ModelComponent.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="PlaneComponent.cpp" />
+    <ClCompile Include="RelativeComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Skybox.cpp" />
   </ItemGroup>
@@ -144,6 +145,7 @@
     <ClInclude Include="ModelComponent.h" />
     <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="PlaneComponent.h" />
+    <ClInclude Include="RelativeComponent.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="stb_image.h" />

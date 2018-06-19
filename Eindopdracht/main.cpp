@@ -14,6 +14,7 @@
 #include "ModelComponent.h"
 #include "PlaneComponent.h"
 #include "MoveComponent.h"
+#include "RelativeComponent.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include "Skybox.h"
@@ -149,6 +150,22 @@ void initScene() {
 	car->setOffset(0, 0, 10);
 	scene->addGameObject(car);
 
+	GameObject* cube = new GameObject();
+	CubeDrawComponent* cubeComponent = new CubeDrawComponent();
+	cubeComponent->setColor(1, 0, 0);
+	cubeComponent->setSize(1);
+	cube->drawComponent = cubeComponent;
+	cube->setPosition(0, 0, 0);
+	cube->setRotationAll(0);
+	cube->setScaleAll(1);
+	cube->setOffset(4, 0, 0);
+	RelativeComponent* comp = new RelativeComponent();
+	comp->centerObject = car;
+	cube->addComponent(comp);
+	MoveComponent* move2 = new MoveComponent();
+	move2->setRotationSpeed(0, 0, 0);
+	cube->addComponent(move2);
+	scene->addGameObject(cube);
 
 
 
