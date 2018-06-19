@@ -1,0 +1,13 @@
+De camera kan worden bestuurd met:
+W -> vooruit
+S -> achteruit
+A -> links
+D -> rechts
+E -> omlaag
+Spatie -> omhoog
+
+Met de muis kan de gebruiker een richting op kijken
+
+De gebruiker kan de omgeving beinvloeden met:
+F -> laat de tijd sneller vooruit lopen
+V -> laat de tijd langzamer of zelfs terug lopen.
