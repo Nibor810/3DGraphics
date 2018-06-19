@@ -57,20 +57,15 @@ void Scene::drawText(std::string text, int x, int y)
 	
 	glMatrixMode(GL_MODELVIEW); // change current matrix to MODELVIEW matrix again
 	
-	glLoadIdentity(); // reset it to identity matrix
+	//glLoadIdentity(); // reset it to identity matrix -> lets light move with player for some reason?
 	
 	glPushMatrix(); // push current state of MODELVIEW matrix to stack
-	
 	glLoadIdentity(); // reset it again. (may not be required, but it my convention)
-	
 	glRasterPos2i(x, height - y); // raster position in 2D
-	
 	for (int i = 0; i<text.length(); i++) {
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, (int)text[i]); // generation of characters in our text with 9 by 15 GLU font
 	}
-	
 	glPopMatrix(); // get MODELVIEW matrix value from stack
-	
 	glMatrixMode(GL_PROJECTION); // change current matrix mode to PROJECTION
 	
 	glLoadMatrixd(matrix); // reset
