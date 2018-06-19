@@ -13,11 +13,12 @@
 #include "CubeDrawComponent.h"
 #include "ModelComponent.h"
 #include "PlaneComponent.h"
+#include "MoveComponent.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include "Skybox.h"
 
-//baguette
+
 float lastFrameTime = 0;
 GLuint textures[NUMBER_OF_TEXTURES];
 int width, height;
@@ -69,24 +70,9 @@ void initLighting()
 	glPopMatrix();
 }
 
-void updateLight(float deltaTime) 
-{
-
-}
-
 void initSkybox() {
 	skybox.load((SKYBOX_MIN / sin(PI / 4)), textures[1]);
 }
-
-void drawSphere(float radius) {
-	//glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, qaGreen);
-	//glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, qaGreen);
-	//glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, qaWhite);
-	//glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 20);
-	glColor3f(0,1,0);
-	glutSolidSphere(radius, 25, 25);
-}
-
 
 void display()
 {
@@ -109,19 +95,9 @@ void display()
 	glRotatef(camera.rotZ, 0, 0, 1);
 	glTranslatef(camera.posX, camera.posZ, camera.posY);
 
-	glPushMatrix();
-	glTranslatef(qaLightPosition[0], qaLightPosition[1], qaLightPosition[2]);
-	drawSphere(1);
-	glPopMatrix();
-
-
-	
 	scene->drawScene();
 	skybox.draw(camera.posX, camera.posY, camera.posZ);
 	scene->drawHUD();
-	
-
-	
 
 	glutSwapBuffers();
 }
@@ -165,9 +141,9 @@ void initScene() {
 	car->setPosition(0, 2, 0);
 	car->setRotationAll(0);
 	car->setScaleAll(0.05f);
+	MoveComponent* move = new MoveComponent();
+	car->addComponent(move);
 	scene->addGameObject(car);
-
-	
 
 }
 
@@ -225,7 +201,6 @@ void idle()
 	float frameTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
 	float deltaTime = frameTime - lastFrameTime;
 	lastFrameTime = frameTime;
-	updateLight(deltaTime);
 
 	const float speed = camera.speed;
 	if (keys['a']) move(0, deltaTime*speed);
@@ -235,6 +210,8 @@ void idle()
 	if (keys[' ']) moveUp(deltaTime*speed);
 	if (keys['e']) moveDown(deltaTime*speed);
 
+
+	scene->updateScene(deltaTime);
 	glutPostRedisplay();
 }
 

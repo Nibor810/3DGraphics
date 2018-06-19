@@ -1,8 +1,10 @@
 #pragma once
+class GameObject;
 class Component
 {
 public:
-	virtual void update();
+	GameObject * component_game_object;
+	virtual void update(float elapsedTime) = 0;
 	Component();
 	~Component();
 };

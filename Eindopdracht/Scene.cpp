@@ -46,9 +46,6 @@ void Scene::drawText(std::string text, int x, int y)
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_SMOOTH);
 	glDisable(GL_LIGHTING);
-
-	//const int width = WINDOW_SIZE_WIDTH;
-	//const int height = WINDOW_SIZE_HEIGHT;
 	glMatrixMode(GL_PROJECTION); // change the current matrix to PROJECTION
 	double matrix[16]; // 16 doubles in stack memory
 	glGetDoublev(GL_PROJECTION_MATRIX, matrix); // get the values from PROJECTION matrix to local variable
@@ -56,8 +53,7 @@ void Scene::drawText(std::string text, int x, int y)
 	glOrtho(0, WINDOW_SIZE_WIDTH, 0, WINDOW_SIZE_HEIGHT, -5, 5); // orthographic perspective
 	
 	glMatrixMode(GL_MODELVIEW); // change current matrix to MODELVIEW matrix again
-	
-	//glLoadIdentity(); // reset it to identity matrix -> lets light move with player for some reason?
+
 	
 	glPushMatrix(); // push current state of MODELVIEW matrix to stack
 	glLoadIdentity(); // reset it again. (may not be required, but it my convention)

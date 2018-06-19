@@ -131,6 +131,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModelComponent.cpp" />
+    <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="PlaneComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Skybox.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="DrawComponent.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ModelComponent.h" />
+    <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="PlaneComponent.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Skybox.h" />
