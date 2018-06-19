@@ -108,6 +108,7 @@ void initScene() {
 	plane->setRotationAll(0);
 	plane->setScaleAll(1);
 	plane->setOffset(0, 0, 0);
+	plane->setOffsetRotationAll(0);
 	scene->addGameObject(plane);
 
 	/*
@@ -136,6 +137,7 @@ void initScene() {
 	car->drawComponent = model;
 	car->setPosition(0, -1, 0);
 	car->setRotationAll(0);
+	car->setOffsetRotationAll(0);
 	car->setScaleAll(0.05f);
 	MoveComponent* move = new MoveComponent();
 	move->setRotationSpeed(0, 30, 0);
@@ -143,22 +145,20 @@ void initScene() {
 	car->setOffset(0, 0, 25);
 	scene->addGameObject(car);
 
-	GameObject* cube = new GameObject();
-	CubeDrawComponent* cubeComponent = new CubeDrawComponent();
-	cubeComponent->setColor(1, 0, 0);
-	cubeComponent->setSize(1);
-	cube->drawComponent = cubeComponent;
-	cube->setPosition(0, 0, 0);
-	cube->setRotationAll(0);
-	cube->setScaleAll(1);
-	cube->setOffset(8, 1, 0);
+	GameObject* miniCar = new GameObject();
+	miniCar->drawComponent = model;
+	miniCar->setPosition(0, 0, 0);
+	miniCar->setRotation(0,0,0);
+	miniCar->setScaleAll(0.005f);
+	miniCar->setOffset(8, 1, 0);
+	miniCar->setOffsetRotation(0,90,0);
 	RelativeComponent* comp = new RelativeComponent();
 	comp->centerObject = car;
-	cube->addComponent(comp);
+	miniCar->addComponent(comp);
 	MoveComponent* move2 = new MoveComponent();
-	move2->setRotationSpeed(0, 0, 0);
-	cube->addComponent(move2);
-	scene->addGameObject(cube);
+	move2->setRotationSpeed(0, 180, 0);
+	miniCar->addComponent(move2);
+	scene->addGameObject(miniCar);
 
 
 

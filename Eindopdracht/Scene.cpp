@@ -59,6 +59,7 @@ void Scene::loadMap(const char * imageLocation, GLuint* textures)
 				tree->setRotationAll(0);
 				tree->setScaleAll(1);
 				tree->setOffset(0, 0, 0);
+				tree->setOffsetRotationAll(0);
 				addGameObject(tree);
 			}
 			//pixelwaarde tusse 60 & 80
@@ -75,6 +76,7 @@ void Scene::loadMap(const char * imageLocation, GLuint* textures)
 				tree->setRotationAll(0);
 				tree->setScaleAll(2);
 				tree->setOffset(0, 0, 0);
+				tree->setOffsetRotationAll(0);
 				addGameObject(tree);
 			}
 		}

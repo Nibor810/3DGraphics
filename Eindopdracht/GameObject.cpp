@@ -32,6 +32,16 @@ void GameObject::setOffset(float x, float y, float z)
 	offset = new Vector3D(x, y, z);
 }
 
+void GameObject::setOffsetRotation(float x, float y, float z)
+{
+	offsetRotation = new Vector3D(x, y, z);
+}
+
+void GameObject::setOffsetRotationAll(float offsetRotation_)
+{
+	offsetRotation = new Vector3D(offsetRotation_, offsetRotation_, offsetRotation_);
+}
+
 void GameObject::drawGameObject()
 {
 	glPushMatrix();
@@ -40,6 +50,9 @@ void GameObject::drawGameObject()
 	glRotatef(rotation->y, 0, 1, 0);
 	glRotatef(rotation->z, 0, 0, 1);
 	glTranslatef(offset->x,offset->y,offset->z);
+	glRotatef(offsetRotation->x, 1, 0, 0);
+	glRotatef(offsetRotation->y, 0, 1, 0);
+	glRotatef(offsetRotation->z, 0, 0, 1);
 	glScalef(scale->x, scale->y, scale->z);
 	drawComponent->draw();
 	glPopMatrix();
