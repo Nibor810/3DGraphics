@@ -114,6 +114,7 @@ void initScene() {
 	plane->setPosition(0, -1, 0);
 	plane->setRotationAll(0);
 	plane->setScaleAll(1);
+	plane->setOffset(0, 0, 0);
 	scene->addGameObject(plane);
 
 	for (int x = -10; x <= 10; x += 5)
@@ -129,6 +130,7 @@ void initScene() {
 			cube->setPosition(x, 0, y);
 			cube->setRotationAll(0);
 			cube->setScaleAll(1);
+			cube->setOffset(0, 0, 0);
 			scene->addGameObject(cube);
 
 		}
@@ -142,7 +144,9 @@ void initScene() {
 	car->setRotationAll(0);
 	car->setScaleAll(0.05f);
 	MoveComponent* move = new MoveComponent();
+	move->setRotationSpeed(0, 30, 0);
 	car->addComponent(move);
+	car->setOffset(0, 0, 0);
 	scene->addGameObject(car);
 
 }

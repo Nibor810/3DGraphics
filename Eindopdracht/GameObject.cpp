@@ -39,7 +39,7 @@ void GameObject::drawGameObject()
 	glRotatef(rotation->x, 1, 0, 0);
 	glRotatef(rotation->y, 0, 1, 0);
 	glRotatef(rotation->z, 0, 0, 1);
-	glTranslatef(offset->x,offset-y,offset-z);
+	glTranslatef(offset->x,offset->y,offset->z);
 	glScalef(scale->x, scale->y, scale->z);
 	drawComponent->draw();
 	glPopMatrix();
