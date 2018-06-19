@@ -65,7 +65,7 @@ void initLighting()
 	//glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, qaAmbientLight);
 	glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 	glPushMatrix();
-	glLightfv(GL_LIGHT0, GL_POSITION, qaLightPosition);
+	//glLightfv(GL_LIGHT0, GL_POSITION, qaLightPosition);
 	glPopMatrix();
 }
 
@@ -118,7 +118,7 @@ void display()
 	
 	scene->drawScene();
 	skybox.draw(camera.posX, camera.posY, camera.posZ);
-	//scene->drawHUD();
+	scene->drawHUD();
 	
 
 	

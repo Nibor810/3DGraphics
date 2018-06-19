@@ -43,11 +43,10 @@ void Scene::loadMap(const char * imageLocation)
 void Scene::drawText(std::string text, int x, int y)
 {
 	glColor3f(1, 1, 1);
-	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_SMOOTH);
-	glDisable(GL_LIGHTING);
-	glDisable(GL_LIGHT0);
+
+
 	const int width = WINDOW_SIZE_WIDTH;
 	const int height = WINDOW_SIZE_HEIGHT;
 	glMatrixMode(GL_PROJECTION); // change the current matrix to PROJECTION
@@ -55,23 +54,34 @@ void Scene::drawText(std::string text, int x, int y)
 	glGetDoublev(GL_PROJECTION_MATRIX, matrix); // get the values from PROJECTION matrix to local variable
 	glLoadIdentity(); // reset PROJECTION matrix to identity matrix
 	glOrtho(0, width, 0, height, -5, 5); // orthographic perspective
+	
 	glMatrixMode(GL_MODELVIEW); // change current matrix to MODELVIEW matrix again
+	
 	glLoadIdentity(); // reset it to identity matrix
+	
 	glPushMatrix(); // push current state of MODELVIEW matrix to stack
+	
 	glLoadIdentity(); // reset it again. (may not be required, but it my convention)
+	
 	glRasterPos2i(x, height - y); // raster position in 2D
+	
 	for (int i = 0; i<text.length(); i++) {
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, (int)text[i]); // generation of characters in our text with 9 by 15 GLU font
 	}
+	
 	glPopMatrix(); // get MODELVIEW matrix value from stack
+	
 	glMatrixMode(GL_PROJECTION); // change current matrix mode to PROJECTION
+	
 	glLoadMatrixd(matrix); // reset
+	
 	glMatrixMode(GL_MODELVIEW); // change current matrix mode to MODELVIEW
-	glEnable(GL_TEXTURE_2D);
+	
+	
+	
+
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_SMOOTH);
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
 }
 
 void Scene::drawHUD()
