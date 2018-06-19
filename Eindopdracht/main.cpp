@@ -110,7 +110,8 @@ void initScene() {
 	GameObject* plane = new GameObject();
 	PlaneComponent* planeComponent = new PlaneComponent();
 	planeComponent->setColor(0, 1, 0);
-	planeComponent->setSize(15);
+	planeComponent->setTexture(textures[2]);
+	planeComponent->setSize(40);
 	plane->drawComponent = planeComponent;
 	plane->setPosition(0, -1, 0);
 	plane->setRotationAll(0);
@@ -141,13 +142,13 @@ void initScene() {
 	GameObject* car = new GameObject();
 	model_component* model = new model_component("models/honda_jazz.obj", textures[0]);
 	car->drawComponent = model;
-	car->setPosition(0, 2, 0);
+	car->setPosition(0, -1, 0);
 	car->setRotationAll(0);
 	car->setScaleAll(0.05f);
 	MoveComponent* move = new MoveComponent();
 	move->setRotationSpeed(0, 30, 0);
 	car->addComponent(move);
-	car->setOffset(0, 0, 10);
+	car->setOffset(0, 0, 25);
 	scene->addGameObject(car);
 
 	GameObject* cube = new GameObject();
@@ -158,7 +159,7 @@ void initScene() {
 	cube->setPosition(0, 0, 0);
 	cube->setRotationAll(0);
 	cube->setScaleAll(1);
-	cube->setOffset(4, 0, 0);
+	cube->setOffset(8, 1, 0);
 	RelativeComponent* comp = new RelativeComponent();
 	comp->centerObject = car;
 	cube->addComponent(comp);
@@ -196,6 +197,7 @@ void initTextures() {
 	glGenTextures(NUMBER_OF_TEXTURES, textures);
 	loadTexture(0, "models/Jazz_diffuse.jpg");
 	loadTexture(1, "models/skybox.png");
+	loadTexture(2, "models/floor.png");
 }
 
 void initWorld() {
