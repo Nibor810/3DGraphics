@@ -42,14 +42,7 @@ Vector3D lightPosition = Vector3D(0,6,0);
 
 bool keys[255];
 Scene* scene;
-/*
-GLfloat qaBlack[] = { 0.0, 0.0, 0.0, 1.0 }; //Black Color
-GLfloat qaGreen[] = { 0.0, 1.0, 0.0, 1.0 }; //Green Color
-GLfloat qaWhite[] = { 1.0, 1.0, 1.0, 1.0 }; //White Color
-GLfloat qaRed[] = { 1.0, 0.0, 0.0, 1.0 }; //White Color
-// Set lighting intensity and color
-// Light source position
-*/
+
 GLfloat qaLightPosition[] = { 0, 6, 0, 1 };
 void initLighting()
 {
@@ -64,11 +57,8 @@ void initLighting()
 	glLightfv(GL_LIGHT0, GL_AMBIENT, qaAmbientLight);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, qaDiffuseLight);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, qaSpecularLight);
-	//glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, qaSpecularLight);
-	//glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, qaAmbientLight);
 	glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
 	glPushMatrix();
-	//glLightfv(GL_LIGHT0, GL_POSITION, qaLightPosition);
 	glPopMatrix();
 }
 
@@ -82,7 +72,6 @@ void display()
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 	//als je wil dat licht met camera mee gaat, moet hij in de init.
 	glLightfv(GL_LIGHT0, GL_POSITION, qaLightPosition);
-
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
