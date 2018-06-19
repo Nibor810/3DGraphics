@@ -12,6 +12,7 @@
 #include "GameObject.h"
 #include "CubeDrawComponent.h"
 #include "ModelComponent.h"
+#include "PlaneComponent.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include "Skybox.h"
@@ -114,17 +115,13 @@ void display()
 	glPopMatrix();
 
 
-	glColor3f(0.1f, 1.0f, 0.2f);
-	glBegin(GL_QUADS);
-	glVertex3f(-15, -1, -15);
-	glVertex3f(15, -1, -15);
-	glVertex3f(15, -1, 15);
-	glVertex3f(-15, -1, 15);
-	glEnd();
-
+	
 	scene->drawScene();
+	skybox.draw(camera.posX, camera.posY, camera.posZ);
+	//scene->drawHUD();
+	
 
-	skybox.draw();
+	
 
 	glutSwapBuffers();
 }
@@ -132,6 +129,16 @@ void display()
 //add all obejct to scene
 void initScene() {
 	scene = new Scene();
+
+	GameObject* plane = new GameObject();
+	PlaneComponent* planeComponent = new PlaneComponent();
+	planeComponent->setColor(0, 1, 0);
+	planeComponent->setSize(15);
+	plane->drawComponent = planeComponent;
+	plane->setPosition(0, -1, 0);
+	plane->setRotationAll(0);
+	plane->setScaleAll(1);
+	scene->addGameObject(plane);
 
 	for (int x = -10; x <= 10; x += 5)
 	{

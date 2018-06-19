@@ -8,7 +8,6 @@ void Scene::drawScene()
 	{
 		o->drawGameObject();
 	}
-	drawHUD();
 }
 
 void Scene::updateScene(float deltaTime)
@@ -47,6 +46,8 @@ void Scene::drawText(std::string text, int x, int y)
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_SMOOTH);
+	glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHT0);
 	const int width = WINDOW_SIZE_WIDTH;
 	const int height = WINDOW_SIZE_HEIGHT;
 	glMatrixMode(GL_PROJECTION); // change the current matrix to PROJECTION
@@ -69,11 +70,14 @@ void Scene::drawText(std::string text, int x, int y)
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_SMOOTH);
-
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 }
 
 void Scene::drawHUD()
 {
+	drawText("temp", WINDOW_SIZE_WIDTH - 100, 25);
+	drawText("test", 10, 25);
 }
 
 Scene::Scene()

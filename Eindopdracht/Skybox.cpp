@@ -65,12 +65,14 @@ void Skybox::load(float zfar, int text_id)
 }
 
 
-void Skybox::draw() const
+void Skybox::draw(float x, float y, float z) const
 {
 	glPushMatrix();
+	glColor3f(1, 1, 1);
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture_Skybox);
+	glTranslatef(x, y, z);
 	glCallList(id_Skybox);
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_LIGHTING);

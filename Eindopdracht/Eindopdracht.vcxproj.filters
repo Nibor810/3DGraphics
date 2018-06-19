@@ -45,6 +45,9 @@
     <ClCompile Include="Skybox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PlaneComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene.h">
@@ -73,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="Skybox.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneComponent.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

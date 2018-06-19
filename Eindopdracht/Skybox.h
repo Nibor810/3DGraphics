@@ -10,7 +10,7 @@ public:
 	Skybox();
 	~Skybox();
 	void load(float zfar, int tex_id);
-	void draw() const;
+	void draw(float x, float y, float z) const;
 
 private:
 	int id_Skybox;
